@@ -1,0 +1,41 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Create Product</div>
+                <div class="card-body">
+                    <!-- Mostrar errores si los hay -->
+                    {% if form.errors %}
+                        <ul class="alert alert-danger">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Formulario para crear un producto -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Product Name</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_price" class="form-label">Product Price</label>
+                            {{ form.price }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

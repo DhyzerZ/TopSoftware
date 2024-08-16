@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block header_title %}{{ subtitle }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Mostrar mensajes de éxito -->
+    {% if messages %}
+        <div class="col-12">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Lista de productos -->
+    {% for product in products %}
+    <div class="col-md-4 col-lg-3 mb-4">
+        <div class="card">
+            <img src="https://static.djangoproject.com/img/logos/django-logo-positive.svg" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body text-center">
+                <a href="{% url 'show' id=product.id %}" class="btn btn-primary">{{ product.name }}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
